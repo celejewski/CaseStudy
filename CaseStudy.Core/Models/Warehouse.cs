@@ -10,7 +10,6 @@ namespace CaseStudy.Core.Models
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-
         [JsonPropertyName("location")]
         public Location Location { get; set; }
 

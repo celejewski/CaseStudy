@@ -46,50 +46,88 @@ export const CarDetails = () => {
     if (isLoading) return <Spinner />
 
     return (
-        <form>
-            <div className="form-group row">
-                <label htmlFor="id" className="col-sm-2 col-form-label">Id</label>
-                <div className="col-sm-10">
-                    <input type="text" readOnly className="form-control" id="id" value={car.id} />
+        <div className="row">
+            <form className="col-sm-6">
+                <h4>Car details:</h4>
+                <div className="form-group row">
+                    <label htmlFor="id" className="col-sm-4 col-form-label">Id</label>
+                    <div className="col-sm-8">
+                        <input type="text" readOnly className="form-control" id="id" value={car.id} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group row">
-                <label htmlFor="make" className="col-sm-2 col-form-label">Make</label>
-                <div className="col-sm-10">
-                    <input type="text" readOnly className="form-control" id="make" value={car.make} />
+                <div className="form-group row">
+                    <label htmlFor="make" className="col-sm-4 col-form-label">Make</label>
+                    <div className="col-sm-8">
+                        <input type="text" readOnly className="form-control" id="make" value={car.make} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group row">
-                <label htmlFor="model" className="col-sm-2 col-form-label">Model</label>
-                <div className="col-sm-10">
-                    <input type="text" readOnly className="form-control" id="model" value={car.model} />
+                <div className="form-group row">
+                    <label htmlFor="model" className="col-sm-4 col-form-label">Model</label>
+                    <div className="col-sm-8">
+                        <input type="text" readOnly className="form-control" id="model" value={car.model} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group row">
-                <label htmlFor="yearModel" className="col-sm-2 col-form-label">Year model</label>
-                <div className="col-sm-10">
-                    <input type="text" readOnly className="form-control" id="yearModel" value={car.yearModel} />
+                <div className="form-group row">
+                    <label htmlFor="yearModel" className="col-sm-4 col-form-label">Year model</label>
+                    <div className="col-sm-8">
+                        <input type="text" readOnly className="form-control" id="yearModel" value={car.yearModel} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group row">
-                <label htmlFor="price" className="col-sm-2 col-form-label">Price</label>
-                <div className="col-sm-10">
-                    <input type="text" readOnly className="form-control" id="price" value={car.price} />
+                <div className="form-group row">
+                    <label htmlFor="price" className="col-sm-4 col-form-label">Price</label>
+                    <div className="col-sm-8">
+                        <input type="text" readOnly className="form-control" id="price" value={car.price} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group row">
-                <label htmlFor="licensed" className="col-sm-2 col-form-label">Licensed</label>
-                <div className="col-sm-10">
-                    <input type="text" readOnly className="form-control" id="licensed" value={car.licensed?.toString()} />
+                <div className="form-group row">
+                    <label htmlFor="licensed" className="col-sm-4 col-form-label">Licensed</label>
+                    <div className="col-sm-8">
+                        <input type="text" readOnly className="form-control" id="licensed" value={car.licensed?.toString()} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group row">
-                <label htmlFor="dateAdded" className="col-sm-2 col-form-label">Date added</label>
-                <div className="col-sm-10">
-                    <input type="text" readOnly className="form-control" id="dateAdded" value={car.dateAdded} />
+                <div className="form-group row">
+                    <label htmlFor="dateAdded" className="col-sm-4 col-form-label">Date added</label>
+                    <div className="col-sm-8">
+                        <input type="text" readOnly className="form-control" id="dateAdded" value={car.dateAdded} />
+                    </div>
                 </div>
-            </div>
-            <button className="btn btn-secondary" onClick={goToCarList}>Go to car list</button>
-        </form>
+                <button className="btn btn-secondary" onClick={goToCarList}>Go to car list</button>
+            </form>
+            <form className="col-sm-6">
+                <h4>Warehouse details:</h4>
+                <div className="form-group row">
+                        <label htmlFor="warehouseId" className="col-sm-4 col-form-label">Id</label>
+                        <div className="col-sm-8">
+                            <input type="text" readOnly className="form-control" id="warehouseId" value={car.warehouseId} />
+                        </div>
+                </div>
+                
+                <div className="form-group row">
+                        <label htmlFor="warehouseName" className="col-sm-4 col-form-label">Name</label>
+                        <div className="col-sm-8">
+                            <input type="text" readOnly className="form-control" id="warehouseName" value={car.warehouseName} />
+                        </div>
+                </div>
+
+                <fieldset className="form-group">
+                    <div className="row">
+                        <legend className="col-sm-4 col-form-label">Coords</legend>
+                        <div className="col-sm-4">
+                            <input type="text" readOnly className="form-control" id="warehouseLatitude" value={car.warehouseLocationLatitude} />
+                        </div>
+                        <div className="col-sm-4">
+                            <input type="text" readOnly className="form-control" id="warehouseLongitude" value={car.warehouseLocationLongitude} />
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <div className="form-group row">
+                        <label htmlFor="location" className="col-sm-4 col-form-label">Location</label>
+                        <div className="col-sm-8">
+                            <input type="text" readOnly className="form-control" id="location" value={car.carsLocation} />
+                        </div>
+                </div>
+            </form>
+        </div>
     );
 }

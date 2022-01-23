@@ -5,6 +5,9 @@ namespace CaseStudy.Core.Models
 {
     public class Vehicle
     {
+        public Warehouse Warehouse { get; set; }
+        public string Location { get; set; }
+
         [JsonPropertyName("_id")]
         public int Id { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using CaseStudy.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -19,6 +20,18 @@ namespace CaseStudy.Core.DataLayer
         {
             var json = await File.ReadAllTextAsync(_path);
             var warehouses = JsonSerializer.Deserialize<Warehouse[]>(json);
+            if (warehouses is null) throw new Exception($"{_path} file is invalid.");
+
+            foreach (var warehouse in warehouses)
+            {
+                var cars = warehouse.Cars;
+                foreach (var vehicle in cars.Vehicles)
+                {
+                    vehicle.Location = cars.Location;
+                    vehicle.Warehouse = warehouse;
+                }
+            }
+
             return warehouses;
         }
     }

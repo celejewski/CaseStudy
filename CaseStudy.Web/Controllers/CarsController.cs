@@ -44,7 +44,12 @@ namespace CaseStudy.Web.Controllers
                 Model = v.Model,
                 Price = v.Price,
                 Licensed = v.Licensed,
-                YearModel = v.YearModel
+                YearModel = v.YearModel,
+                WarehouseLocationLatitude = v.Warehouse.Location.Latitude,
+                WarehouseLocationLongitude = v.Warehouse.Location.Longitude,
+                WarehouseId = v.Warehouse.Id,
+                WarehouseName = v.Warehouse.Name,
+                CarsLocation = v.Location
             };
         }
     }
