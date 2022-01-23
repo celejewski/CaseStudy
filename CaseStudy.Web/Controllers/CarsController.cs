@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CaseStudy.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CarsController : ControllerBase
     {
         private readonly CarRepository _carRepository;
@@ -25,6 +25,13 @@ namespace CaseStudy.Web.Controllers
             var vehicles = await _carRepository.GetVehiclesOrderedByDateAdded();
             var cars = vehicles.Select(MapVehicleToCar);
             return cars;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<Car> Get(int id)
+        {
+            var vehicle = await _carRepository.GetVehicle(id);
+            return MapVehicleToCar(vehicle);
         }
 
         private static Car MapVehicleToCar(Vehicle v)

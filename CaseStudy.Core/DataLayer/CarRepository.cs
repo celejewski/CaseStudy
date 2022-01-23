@@ -22,5 +22,14 @@ namespace CaseStudy.Core.DataLayer
             var vehicles = vehicels.OrderBy(v => v.DateAdded).ToArray();
             return vehicles;
         }
+
+        public async Task<Vehicle> GetVehicle(int id)
+        {
+            var warehouses = await _warehouseProvider.GetWarehouses();
+            var vehicles = warehouses.SelectMany(w => w.Cars.Vehicles);
+
+            var vehicle = vehicles.Single(v => v.Id == id);
+            return vehicle;
+        }
     }
 }

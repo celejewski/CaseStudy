@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { CarTableRow } from './CarTableRow';
 import {Spinner} from './Spinner';
+import {ErrorMessage} from './ErrorMessage';
 
 function useCars() {
     const [cars, setCars] = useState([]);
@@ -12,7 +14,7 @@ function useCars() {
             setHasError(false);
 
             try {
-                const response = await fetch('cars');
+                const response = await fetch('api/cars');
                 if (response.ok) {
                     const cars = await response.json();
                     setCars(cars);
@@ -35,7 +37,7 @@ function useCars() {
 export const CarTable = () => {
     const {cars, isLoading, hasError} = useCars();
 
-    if (hasError) return (<h3>Loading data failed...</h3>);
+    if (hasError) return <ErrorMessage />;
     if (isLoading) return <Spinner />
 
     return (
@@ -52,19 +54,7 @@ export const CarTable = () => {
                 </tr>
             </thead>
             <tbody>
-                {cars.map((c, i) => {
-                    return (
-                        <tr key={i}>
-                            <th scope="row">{c.id}</th>
-                            <td>{c.make}</td>
-                            <td>{c.model}</td>
-                            <td>{c.yearModel}</td>
-                            <td>${c.price.toFixed(2)}</td>
-                            <td>{c.licensed ? "YES" : "NO"}</td>
-                            <td>{new Date(c.dateAdded).toLocaleDateString()}</td>
-                        </tr>
-                    )
-                })}
+                {cars.map(car => <CarTableRow key={car.id} car={car}/>)}
             </tbody>
         </table>
     );
