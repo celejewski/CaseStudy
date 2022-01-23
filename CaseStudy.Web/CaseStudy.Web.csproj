@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CaseStudy.Core\CaseStudy.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="Data\warehouses.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
