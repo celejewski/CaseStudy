@@ -11,6 +11,9 @@ namespace CaseStudy.Core.Models
         [JsonPropertyName("make")]
         public string Make { get; set; }
 
+        [JsonPropertyName("model")]
+        public string Model { get; set; }
+
 
         [JsonPropertyName("year_model")]
         public int YearModel { get; set; }
