@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import {Spinner} from './Spinner';
 import {ErrorMessage} from './ErrorMessage';
+import { ShoppingCart } from './../utils/ShoppingCart';
 
 const useCar = (id) => {
     const [car, setCar] = useState({});
@@ -36,14 +37,28 @@ const useCar = (id) => {
 export const CarDetails = () => {
     const { id } = useParams();
     const { car, isLoading, hasError } = useCar(id);
+    const shoppingCart = ShoppingCart();
+    const [carIsInCart, setCarIsInCart] = useState(shoppingCart.getCarIds().includes(+id));
 
     const history = useHistory();
     const goToCarList = () => {
         history.push("/");
     }
-
+    
     if (hasError) return <ErrorMessage />
     if (isLoading) return <Spinner />
+
+    const onAdd = (e) => {
+        shoppingCart.add(car.id)
+        setCarIsInCart(true);
+        e.preventDefault();
+    }
+
+    const onRemove = (e) => {        
+        shoppingCart.remove(car.id);
+        setCarIsInCart(false);
+        e.preventDefault();
+    }    
 
     return (
         <div className="row">
@@ -91,7 +106,15 @@ export const CarDetails = () => {
                         <input type="text" readOnly className="form-control" id="dateAdded" value={car.dateAdded} />
                     </div>
                 </div>
-                <button className="btn btn-secondary" onClick={goToCarList}>Go to car list</button>
+                <div className="btn-group">
+                    <button className="btn btn-secondary" onClick={goToCarList}>Go to car list</button>
+                    {
+                        carIsInCart 
+                        ? <button className="btn btn-warning" onClick={onRemove}>Remove</button> 
+                        : <button className="btn btn-primary" onClick={onAdd}>Add</button> 
+                    }
+                    
+                </div>
             </form>
             <form className="col-sm-6">
                 <h4>Warehouse details:</h4>

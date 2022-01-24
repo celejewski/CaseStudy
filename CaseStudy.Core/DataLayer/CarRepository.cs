@@ -14,6 +14,16 @@ namespace CaseStudy.Core.DataLayer
             _warehouseProvider = warehouseProvider;
         }
 
+        public async Task<IList<Vehicle>> GetVehicles(int[] carIds)
+        {
+            var warehouses = await _warehouseProvider.GetWarehouses();
+            var vehicels = warehouses
+                .SelectMany(w => w.Cars.Vehicles)
+                .Where(v => carIds.Contains(v.Id));
+
+            return vehicels.ToArray();
+        }
+
         public async Task<IList<Vehicle>> GetVehiclesOrderedByDateAdded()
         {
             var warehouses = await _warehouseProvider.GetWarehouses();
